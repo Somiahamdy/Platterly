@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.platterly.home.view.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_fav"
+        android:name="com.example.platterly.Favourites.view.FavFragment"
+        android:label="Favourite"
+        tools:layout="@layout/fragment_fav" />
+
+
+
+    <fragment
+        android:id="@+id/nav_cat"
+        android:name="com.example.platterly.categories.view.CatFragment"
+        android:label="Categories"
+        tools:layout="@layout/fragment_cat_frag" />
+
+    <fragment
+        android:id="@+id/nav_ing"
+        android:name="com.example.platterly.IngFragment"
+        android:label="Ingrediants"
+        tools:layout="@layout/fragment_ing" />
+
+    <fragment
+        android:id="@+id/nav_plan"
+        android:name="com.example.platterly.PlanFragment"
+        android:label="Plan"
+        tools:layout="@layout/fragment_plan" />
+
+
+</navigation>
