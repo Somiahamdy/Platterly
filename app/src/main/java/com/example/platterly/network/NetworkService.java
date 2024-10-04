@@ -1,6 +1,7 @@
 package com.example.platterly.network;
 
 import com.example.platterly.model.CatResponse;
+import com.example.platterly.model.CountryResponse;
 import com.example.platterly.model.Meal;
 import com.example.platterly.model.MealResponse;
 
@@ -29,5 +30,8 @@ public interface NetworkService {
 
     @GET("search.php")
     Call<MealResponse> getMealByName(@Query("s") String mealName);
+
+    @GET("list.php")
+    Call<CountryResponse> getCountries(@Query("a") String country);
 
 }

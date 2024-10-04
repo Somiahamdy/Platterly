@@ -1,7 +1,10 @@
 package com.example.platterly.mealsearch.presenter;
 
+import android.widget.Toast;
+
 import com.example.platterly.meal.view.MealViewInterface;
 import com.example.platterly.mealsearch.view.MealSearchViewInterface;
+import com.example.platterly.mealsearch.view.SearchFragment;
 import com.example.platterly.model.Meal;
 import com.example.platterly.model.MealRepository;
 import com.example.platterly.network.RMealNetworkCallBack;
@@ -39,11 +42,20 @@ public class MealSearchPresenterImp implements MealSearchPresenter , RMealNetwor
 
     @Override
     public void onRMealSuccessfulResponse(List<Meal> meals) {
-        imealsearchView.setMeals(meals);
+        if(meals.size()==0){
+            meals=new ArrayList<>();
+            imealsearchView.showToast("Not Found!");
+        }else{
+            imealsearchView.setMeals(meals);
+
+        }
+
     }
 
     @Override
     public void onRMealFailureResponse(String errorMessage) {
       imealsearchView.setMeals(new ArrayList<>());
+        //Toast.makeText(this,"Not Found",Toast.LENGTH_SHORT).show();
+        imealsearchView.showToast(errorMessage);
     }
 }

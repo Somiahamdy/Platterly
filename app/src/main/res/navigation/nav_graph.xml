@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/nav_plan"
-        android:name="com.example.platterly.PlanFragment"
+        android:name="com.example.platterly.plan.view.PlanFragment"
         android:label="Plan"
         tools:layout="@layout/fragment_plan" />
 

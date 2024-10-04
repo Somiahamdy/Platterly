@@ -6,7 +6,9 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.example.platterly.model.Meal;
+import com.example.platterly.model.PlanMeal;
 
+import java.util.Collections;
 import java.util.List;
 
 public class MealLocalDataSourceimp implements MealLocalDataSource{
@@ -60,5 +62,34 @@ public class MealLocalDataSourceimp implements MealLocalDataSource{
     @Override
     public LiveData<Meal> getMealDetails(String mealId) {
         return mealDAO.getMealById(mealId);
+    }
+
+    @Override
+    public void InsertMealToPlan(PlanMeal planMeal) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                mealDAO.insert(planMeal);
+                //Log.d("MealLocalDataSourceimp", "Meal inserted with result: " + result);
+            }
+        }).start();
+    }
+
+    @Override
+    public void deleteMealFromPlan(PlanMeal planMeal) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                mealDAO.delete(planMeal);
+                //Log.d("MealLocalDataSourceimp", "Meal inserted with result: " + result);
+            }
+        }).start();
+    }
+
+    @Override
+    public LiveData<List<PlanMeal>> getMealByDate(String date) {
+        return mealDAO.getMealByDate(date);
     }
 }

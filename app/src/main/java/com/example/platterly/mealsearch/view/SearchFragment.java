@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.platterly.R;
 import com.example.platterly.categories.presenter.CatPresenter;
@@ -249,5 +250,10 @@ public class SearchFragment extends Fragment implements onMealSearchClickListene
     public void setMeals(List<Meal> meals) {
      searchAdapter.setList(meals);
      searchAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showToast(String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 }

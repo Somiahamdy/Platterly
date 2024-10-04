@@ -72,4 +72,19 @@ public class MealRepositoryImp implements MealRepository{
     public void getMealSearchName(RMealNetworkCallBack networkCallBack, String s) {
         mealRemoteDataSource.smakeNetworkCall(networkCallBack,s);
     }
+
+    @Override
+    public void insertMealToPlan(PlanMeal planMeal) {
+        mealLocalDataSource.InsertMealToPlan(planMeal);
+    }
+
+    @Override
+    public void RemoveMealFromPlan(PlanMeal planMeal) {
+        mealLocalDataSource.deleteMealFromPlan(planMeal);
+    }
+
+    @Override
+    public LiveData<List<PlanMeal>> getMealByDate(String date) {
+        return mealLocalDataSource.getMealByDate(date);
+    }
 }

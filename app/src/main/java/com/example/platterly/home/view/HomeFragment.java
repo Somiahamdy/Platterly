@@ -9,11 +9,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.platterly.Country.presenter.CountryPresenter;
+import com.example.platterly.Country.presenter.CountryPresenterImp;
+import com.example.platterly.Country.view.CountryAdapter;
+import com.example.platterly.Country.view.CountryViewInterface;
 import com.example.platterly.R;
 import com.example.platterly.categories.presenter.CatPresenter;
 import com.example.platterly.categories.presenter.CatPresenterImp;
@@ -25,6 +30,9 @@ import com.example.platterly.home.presenter.HomePresenter;
 import com.example.platterly.home.presenter.HomePresenterImp;
 import com.example.platterly.model.CatRepository;
 import com.example.platterly.model.CatRepositoryImp;
+import com.example.platterly.model.Country;
+import com.example.platterly.model.CountryRepositoryImp;
+import com.example.platterly.model.CountryRespository;
 import com.example.platterly.model.Meal;
 import com.example.platterly.model.MealRepository;
 import com.example.platterly.model.MealRepositoryImp;
@@ -36,8 +44,10 @@ import com.example.platterly.network.RMealRemoteDataSourceImp;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment implements HomeViewInterface,onHomeClickListener{
+public class HomeFragment extends Fragment implements HomeViewInterface,onHomeClickListener, CountryViewInterface, onCountryClickListener {
     RecyclerView homeRecycler;
+    RecyclerView countryRecycler;
+
     HomeAdapter homeAdapter;
     private Context context;
     private MealRepository mealrepo;
@@ -45,6 +55,11 @@ public class HomeFragment extends Fragment implements HomeViewInterface,onHomeCl
     RMealRemoteDataSource mealRemoteDataSource ;
     MealLocalDataSource mealLocalDataSource;
     HomeViewInterface ihomeview;
+
+    CountryAdapter countryAdapter;
+    CountryRespository countryRepo;
+    CountryPresenter countryPresenter;
+    CountryViewInterface icountryView;
 
 
 
@@ -67,18 +82,33 @@ public class HomeFragment extends Fragment implements HomeViewInterface,onHomeCl
         super.onViewCreated(view, savedInstanceState);
         homeRecycler = view.findViewById(R.id.homerv);
         homeRecycler.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        homeRecycler.setLayoutManager(layoutManager);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(context);
+        layoutManager1.setOrientation(RecyclerView.HORIZONTAL);
+        homeRecycler.setLayoutManager(layoutManager1);
+
+        countryRecycler = view.findViewById(R.id.countriesrv);
+        countryRecycler.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(context);
+        layoutManager2.setOrientation(RecyclerView.HORIZONTAL);
+        countryRecycler.setLayoutManager(layoutManager2);
+
 
         homeAdapter = new HomeAdapter(context,this);
+        countryAdapter = new CountryAdapter(context,this);
+
         mealRemoteDataSource= RMealRemoteDataSourceImp.getInstance();
         mealLocalDataSource = MealLocalDataSourceimp.getInstance(context);
         mealrepo = MealRepositoryImp.getInstance(mealRemoteDataSource,mealLocalDataSource);
+        countryRepo = CountryRepositoryImp.getInstance(mealRemoteDataSource);
         homeRecycler.setAdapter(homeAdapter);
+        countryRecycler.setAdapter(countryAdapter);
         // favAdapter = new FavAdapter(new ArrayList<>(),FavProductsActivity.CONTEXT_IGNORE_SECURITY,FavProductsActivity.class);
         ihomePresenter= new HomePresenterImp(mealrepo,this);
         ihomePresenter.getRandomMeal();
+
+        countryPresenter=new CountryPresenterImp(countryRepo,this);
+        countryPresenter.getAllCountries();
 
     }
 
@@ -92,5 +122,18 @@ public class HomeFragment extends Fragment implements HomeViewInterface,onHomeCl
     @Override
     public void showErrors(String error) {
         Toast.makeText(context,error,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setCountries(List<Country> countries) {
+        Log.d("HomeFragment", "Country list received with size: " + countries.size());
+
+        countryAdapter.setList(countries);
+        countryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showErrorMessage(String errorMsg) {
+
     }
 }

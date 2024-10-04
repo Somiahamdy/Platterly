@@ -18,4 +18,8 @@ public interface MealRepository {
     public void getMealSearchCountry(RMealNetworkCallBack networkCallBack,String s);
     public void getMealSearchIngredient(RMealNetworkCallBack networkCallBack,String s);
     public void getMealSearchName(RMealNetworkCallBack networkCallBack,String s);
+
+    public void insertMealToPlan(PlanMeal planMeal);
+    public void RemoveMealFromPlan(PlanMeal planMeal);
+    public LiveData<List<PlanMeal>> getMealByDate(String date);
 }

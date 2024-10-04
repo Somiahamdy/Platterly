@@ -58,6 +58,10 @@
     <string name="country">Country</string>
     <string name="cat">Category</string>
     <string name="names">Name</string>
+    <string name="addtoplan">Add To Plan</string>
+    <string name="addtoplann">Add To Plan</string>
+    <string name="addtocal">Add To Calendar</string>
+    <string name="countries">Countries</string>
 
     <string-array name="spinner_items">
         <item>Name</item>

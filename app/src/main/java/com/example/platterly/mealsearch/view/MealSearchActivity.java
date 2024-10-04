@@ -3,6 +3,7 @@ package com.example.platterly.mealsearch.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.platterly.Country.view.CountryAdapter;
 import com.example.platterly.R;
 import com.example.platterly.categories.view.AllCatAdapter;
 import com.example.platterly.db.MealLocalDataSource;
@@ -40,6 +42,7 @@ public class MealSearchActivity extends AppCompatActivity implements MealSearchV
     RMealRemoteDataSource mealRemoteDataSource ;
     MealLocalDataSource mealLocalDataSource;
     private String MealCat;
+    private String MealCountry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,7 @@ public class MealSearchActivity extends AppCompatActivity implements MealSearchV
 
         Intent incomingIntent = getIntent();
         MealCat=incomingIntent.getStringExtra(AllCatAdapter.MealCat);
+        MealCountry=incomingIntent.getStringExtra(CountryAdapter.Mealcountry);
         mealrecycler = findViewById(R.id.mealsearchrv);
         mealrecycler.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -62,6 +66,7 @@ public class MealSearchActivity extends AppCompatActivity implements MealSearchV
         // favAdapter = new FavAdapter(new ArrayList<>(),FavProductsActivity.CONTEXT_IGNORE_SECURITY,FavProductsActivity.class);
         imealsearchPresenter= new MealSearchPresenterImp(mealrepo,this);
         imealsearchPresenter.getMealSearch(MealCat);
+        imealsearchPresenter.getMealSearchcountry(MealCountry);
 
 
     }
@@ -70,6 +75,11 @@ public class MealSearchActivity extends AppCompatActivity implements MealSearchV
     public void setMeals(List<Meal> meals) {
         msa.setList(meals);
         msa.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

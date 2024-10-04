@@ -16,6 +16,7 @@ import com.example.platterly.Favourites.view.FavFragment;
 import com.example.platterly.mealsearch.view.SearchFragment;
 import com.example.platterly.categories.view.CatFragment;
 import com.example.platterly.home.view.HomeFragment;
+import com.example.platterly.plan.view.PlanFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
  public class MainActivity extends AppCompatActivity {
@@ -26,12 +27,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
      private HomeFragment homeFrag;
      private FavFragment favFrag;
      private SearchFragment searchFrag;
+     private PlanFragment planFragment;
      public static String MainFrag="MainFrag";
 
      public static String HOME_Frg_TAG = "HomeFragment";
      public static String FAV_Frg_TAG = "Favfragment";
      public static String SEARCH_FRG_TAG="Searchfragment";
-    @Override
+     public static String PLAN_FRG_TAG="Planfragment";
+
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -43,6 +47,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
         homeFrag = new HomeFragment();
         favFrag = new FavFragment();
         searchFrag = new SearchFragment();
+        planFragment=new PlanFragment();
 
         if (savedInstanceState == null) {
             loadFragment(homeFrag, HOME_Frg_TAG); // load home fragment by default
@@ -50,6 +55,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.navhost);
+
+
+
 
 
 
@@ -72,19 +80,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
                 loadFragment(favFrag, FAV_Frg_TAG);
                 return true;
             }else if(item.getItemId()==R.id.home_page){
-                Toast.makeText(MainActivity.this, "Area", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
                 loadFragment(homeFrag, HOME_Frg_TAG);
                 return true;
             }else if(item.getItemId()==R.id.cat_page){
-                Toast.makeText(MainActivity.this, "cat", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Categories", Toast.LENGTH_SHORT).show();
                 loadFragment(catFrag, CAT_Frg_TAG);
                 return true;
             }else if(item.getItemId()==R.id.search_page){
-                Toast.makeText(MainActivity.this, "ing", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
                 loadFragment(searchFrag, SEARCH_FRG_TAG);
                 return true;
             }else if(item.getItemId()==R.id.plan_page){
                 Toast.makeText(MainActivity.this, "Plan", Toast.LENGTH_SHORT).show();
+                loadFragment(planFragment, PLAN_FRG_TAG);
+
                 return true;
             }
             return false;

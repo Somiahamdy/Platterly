@@ -16,8 +16,10 @@ import com.example.platterly.mealsearch.view.MealSearchAdapter;
 import com.example.platterly.model.Meal;
 import com.example.platterly.model.MealRepository;
 import com.example.platterly.model.MealRepositoryImp;
+import com.example.platterly.model.PlanMeal;
 import com.example.platterly.network.RMealRemoteDataSource;
 import com.example.platterly.network.RMealRemoteDataSourceImp;
+import com.example.platterly.plan.view.CalendarFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -79,5 +81,12 @@ public class RMealActivity extends AppCompatActivity implements MealViewInterfac
     @Override
     public void onMealRemoveFavListener(Meal meal) {
         imealPresenter.deleteMeal(meal);
+    }
+
+    @Override
+    public void onOpenCalendar(PlanMeal planMeal) {
+        CalendarFragment calendarFragment = new CalendarFragment(planMeal);
+        calendarFragment.show(getSupportFragmentManager(),"calendar fragment");
+
     }
 }

@@ -73,4 +73,12 @@
         app:layout_constraintTop_toTopOf="@+id/rmealimg"
         app:srcCompat="@drawable/heartempty1" />
 
+    <ImageButton
+        android:id="@+id/opencalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/stat_notify_more"
+        tools:layout_editor_absoluteX="108dp"
+        tools:layout_editor_absoluteY="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

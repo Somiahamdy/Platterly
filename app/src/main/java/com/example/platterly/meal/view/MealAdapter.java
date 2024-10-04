@@ -2,6 +2,7 @@ package com.example.platterly.meal.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.platterly.R;
 import com.example.platterly.home.view.HomeAdapter;
-import com.example.platterly.home.view.onHomeClickListener;
 import com.example.platterly.model.Meal;
+import com.example.platterly.model.PlanMeal;
+import com.example.platterly.plan.view.CalendarFragment;
+import com.example.platterly.plan.view.PlanActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,11 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
     private static final String TAG="mealviewer";
     private onMealClickListener meallistener;
     public static boolean fav=false;
+    public static String MEALPLANNAME="MealName";
+    public PlanMeal planMeal;
+    public static String MealThumb="mealthumb";
+    //public
+
 
 
     public MealAdapter(Context context, onMealClickListener _listener){
@@ -49,6 +57,10 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
         View layout;
         WebView webView;
         ImageButton addToFav;
+        ImageButton openplan;
+        //PlanMeal planMeal;
+
+
 
         public ViewHolder(@NonNull View v) {
             super(v);
@@ -63,6 +75,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
             constraintlayout = v.findViewById(R.id.meal_row);
             webView=v.findViewById(R.id.mealview);
             addToFav = v.findViewById(R.id.mealaddfav);
+            openplan = v.findViewById(R.id.opencalendar);
 
         }
     }
@@ -117,6 +130,21 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
                     fav=false;
                 }
 
+            }
+        });
+        holder.openplan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //planMeal.setMealID(meal.get(position).getIdMeal());
+               // planMeal.setMealName(meal.get(position).getStrMeal());
+
+                //meallistener.onOpenCalendar(planMeal);
+
+                 Intent mealCalenderIntent = new Intent(context, PlanActivity.class);
+                mealCalenderIntent.putExtra(HomeAdapter.MealID,meal.get(position).getIdMeal());
+                mealCalenderIntent.putExtra(MealAdapter.MEALPLANNAME,meal.get(position).getStrMeal());
+                mealCalenderIntent.putExtra(MealAdapter.MealThumb,meal.get(position).getStrMealThumb());
+                context.startActivity(mealCalenderIntent);
             }
         });
 

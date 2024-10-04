@@ -17,6 +17,18 @@
         android:theme="@style/Theme.Platterly"
         tools:targetApi="31">
         <activity
+            android:name=".Country.view.CountryMealsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Platterly" />
+        <activity
+            android:name=".Country.CountryMealsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Platterly" />
+        <activity
+            android:name=".plan.view.PlanActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Platterly" />
+        <activity
             android:name=".mealsearch.view.MealSearchActivity"
             android:exported="false" />
         <activity
