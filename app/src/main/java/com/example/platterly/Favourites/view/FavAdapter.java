@@ -47,17 +47,18 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
         ImageView img;
         ConstraintLayout constraintlayout;
         View layout;
-        ImageButton addToFav;
+        ImageButton removeFav;
         //WebView webView;
 
         public ViewHolder(@NonNull View v) {
             super(v);
             layout = v;
-            nameview = v.findViewById(R.id.mealnamesearch);
+            nameview = v.findViewById(R.id.favnameview);
 
-            img = v.findViewById(R.id.mealsearchimg);
+            img = v.findViewById(R.id.favplanimg);
 
-            constraintlayout = v.findViewById(R.id.mealsearch_row);
+            constraintlayout = v.findViewById(R.id.fav_row);
+            removeFav=v.findViewById(R.id.removefavbtn);
             //addToFav= v.findViewById(R.id.mealaddfav);
 
         }
@@ -68,7 +69,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
     @Override
     public FavAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.mealsearch,parent,false);
+        View v = inflater.inflate(R.layout.fav_layout,parent,false);
         FavAdapter.ViewHolder vh = new FavAdapter.ViewHolder(v);
         return vh;
     }
@@ -81,6 +82,13 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
                         .placeholder(R.drawable.ic_launcher_background)
                         .error(R.drawable.ic_launcher_foreground))
                 .into(holder.img);
+        holder.removeFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mealfavlistener.removeFromFav(meal.get(position));
+            }
+        });
+
         holder.constraintlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

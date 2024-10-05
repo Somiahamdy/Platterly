@@ -71,7 +71,7 @@ public class PlanFragment extends Fragment implements PlanViewInterface , onPlan
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         planRecycler.setLayoutManager(layoutManager);
         calendarViewfrag=view.findViewById(R.id.calendarViewfrag);
-
+        iplanview=this;
 
 
         planMealAdapter = new PlanMealAdapter(context,this);
@@ -104,6 +104,12 @@ public class PlanFragment extends Fragment implements PlanViewInterface , onPlan
     }
 
     @Override
+    public void onRemoveFromPlanClick(PlanMeal planMeal) {
+        mealrepo.RemoveMealFromPlan(planMeal);
+        iplanview.notifyAdapter();
+    }
+
+    @Override
     public void setMeals(List<PlanMeal> meals) {
 
     }
@@ -116,6 +122,11 @@ public class PlanFragment extends Fragment implements PlanViewInterface , onPlan
     @Override
     public void onDataChanged(List<PlanMeal> meal) {
         planMealAdapter.setList(meal);
+        planMealAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void notifyAdapter() {
         planMealAdapter.notifyDataSetChanged();
     }
 }

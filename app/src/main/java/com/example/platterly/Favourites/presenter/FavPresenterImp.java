@@ -32,7 +32,7 @@ public class FavPresenterImp implements FavPresenterInterface{
 
     @Override
     public void deleteMeal(Meal meal) {
-       // mealrepo.
-
+       mealrepo.removeMealFromFav(meal);
+       ifavView.notifyAdapter();
     }
 }

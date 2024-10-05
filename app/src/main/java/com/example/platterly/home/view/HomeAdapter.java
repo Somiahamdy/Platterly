@@ -91,7 +91,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.constraintlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,meal.get(position).getStrCategory(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,meal.get(position).getStrCategory(),Toast.LENGTH_SHORT).show();
                 Intent mealintent = new Intent(context, RMealActivity.class);
                 mealintent.putExtra(HomeAdapter.MealID,meal.get(position).getIdMeal());
 

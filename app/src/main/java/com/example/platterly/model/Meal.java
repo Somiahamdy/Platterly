@@ -5,6 +5,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity(tableName = "meals")
 public class Meal {
     @PrimaryKey
@@ -17,6 +20,12 @@ public class Meal {
     public String strInstructions;
     public String strMealThumb;
     public String strYoutube;
+
+    public static Boolean isFavourite=false;
+
+    private List<String> ingredients;
+    private List<String> measures;
+
     public String strIngredient1;
     public String strIngredient2;
     public String strIngredient3;
@@ -38,6 +47,61 @@ public class Meal {
     public String strMeasure8;
     public String strMeasure9;
     public String strMeasure10;
+
+
+
+    public Boolean getFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        isFavourite = favourite;
+    }
+
+    public void setIngredientsFromFields() {
+        ingredients = new ArrayList<>();
+        if (strIngredient1 != null && !strIngredient1.isEmpty()) ingredients.add(strIngredient1);
+        if (strIngredient2 != null && !strIngredient2.isEmpty()) ingredients.add(strIngredient2);
+        if (strIngredient3 != null && !strIngredient3.isEmpty()) ingredients.add(strIngredient3);
+        if (strIngredient4 != null && !strIngredient4.isEmpty()) ingredients.add(strIngredient4);
+        if (strIngredient5 != null && !strIngredient5.isEmpty()) ingredients.add(strIngredient5);
+        if (strIngredient6 != null && !strIngredient6.isEmpty()) ingredients.add(strIngredient6);
+        if (strIngredient7 != null && !strIngredient7.isEmpty()) ingredients.add(strIngredient7);
+        if (strIngredient8 != null && !strIngredient8.isEmpty()) ingredients.add(strIngredient8);
+        if (strIngredient9 != null && !strIngredient9.isEmpty()) ingredients.add(strIngredient9);
+        if (strIngredient10 != null && !strIngredient10.isEmpty()) ingredients.add(strIngredient10);
+    }
+
+    public void setMeasuresFromFields() {
+        measures = new ArrayList<>();
+        if (strMeasure1 != null && !strMeasure1.isEmpty()) measures.add(strMeasure1);
+        if (strMeasure2 != null && !strMeasure2.isEmpty()) measures.add(strMeasure2);
+        if (strMeasure3 != null && !strMeasure3.isEmpty()) measures.add(strMeasure3);
+        if (strMeasure4 != null && !strMeasure4.isEmpty()) measures.add(strMeasure4);
+        if (strMeasure5 != null && !strMeasure5.isEmpty()) measures.add(strMeasure5);
+        if (strMeasure6 != null && !strMeasure6.isEmpty()) measures.add(strMeasure6);
+        if (strMeasure7 != null && !strMeasure7.isEmpty()) measures.add(strMeasure7);
+        if (strMeasure8 != null && !strMeasure8.isEmpty()) measures.add(strMeasure8);
+        if (strMeasure9 != null && !strMeasure9.isEmpty()) measures.add(strMeasure9);
+        if (strMeasure10 != null && !strMeasure10.isEmpty()) measures.add(strMeasure10);
+
+    }
+
+    public List<String> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public List<String> getMeasures() {
+        return measures;
+    }
+
+    public void setMeasures(List<String> measures) {
+        this.measures = measures;
+    }
 
     @NonNull
     public String getIdMeal() {

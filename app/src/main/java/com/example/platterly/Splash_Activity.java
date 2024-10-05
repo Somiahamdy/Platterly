@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.airbnb.lottie.LottieAnimationView;
 
 public class Splash_Activity extends AppCompatActivity {
-    private static final int SPLASH_SCREEN_TIMEOUT = 5000; // 5 seconds
+    private static final int SPLASH_SCREEN_TIMEOUT = 2400; // 5 seconds
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

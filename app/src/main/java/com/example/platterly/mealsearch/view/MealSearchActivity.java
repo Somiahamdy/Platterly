@@ -43,6 +43,9 @@ public class MealSearchActivity extends AppCompatActivity implements MealSearchV
     MealLocalDataSource mealLocalDataSource;
     private String MealCat;
     private String MealCountry;
+    private boolean catAdapterCall;
+    private boolean countryAdapterCall;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +54,9 @@ public class MealSearchActivity extends AppCompatActivity implements MealSearchV
 
         Intent incomingIntent = getIntent();
         MealCat=incomingIntent.getStringExtra(AllCatAdapter.MealCat);
+        catAdapterCall=incomingIntent.getBooleanExtra(AllCatAdapter.CatAdpaterCall,false);
         MealCountry=incomingIntent.getStringExtra(CountryAdapter.Mealcountry);
+        countryAdapterCall=incomingIntent.getBooleanExtra(CountryAdapter.CountryAdapterCall,false);
         mealrecycler = findViewById(R.id.mealsearchrv);
         mealrecycler.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -65,8 +70,14 @@ public class MealSearchActivity extends AppCompatActivity implements MealSearchV
         mealrecycler.setAdapter(msa);
         // favAdapter = new FavAdapter(new ArrayList<>(),FavProductsActivity.CONTEXT_IGNORE_SECURITY,FavProductsActivity.class);
         imealsearchPresenter= new MealSearchPresenterImp(mealrepo,this);
-        imealsearchPresenter.getMealSearch(MealCat);
-        imealsearchPresenter.getMealSearchcountry(MealCountry);
+        if(catAdapterCall && MealCat !=null){
+            //countryAdapterCall=false;
+            imealsearchPresenter.getMealSearch(MealCat);
+        }else if(countryAdapterCall && MealCountry!=null) {
+            //catAdapterCall=false;
+            imealsearchPresenter.getMealSearchcountry(MealCountry);
+
+        }
 
 
     }

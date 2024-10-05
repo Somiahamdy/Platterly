@@ -7,19 +7,15 @@ import android.os.Bundle;
 import com.example.platterly.R;
 import com.example.platterly.db.MealLocalDataSource;
 import com.example.platterly.db.MealLocalDataSourceimp;
-import com.example.platterly.home.presenter.HomePresenter;
-import com.example.platterly.home.presenter.HomePresenterImp;
 import com.example.platterly.home.view.HomeAdapter;
 import com.example.platterly.meal.presenter.MealPresenter;
 import com.example.platterly.meal.presenter.MealPresenterImp;
-import com.example.platterly.mealsearch.view.MealSearchAdapter;
 import com.example.platterly.model.Meal;
 import com.example.platterly.model.MealRepository;
 import com.example.platterly.model.MealRepositoryImp;
 import com.example.platterly.model.PlanMeal;
 import com.example.platterly.network.RMealRemoteDataSource;
 import com.example.platterly.network.RMealRemoteDataSourceImp;
-import com.example.platterly.plan.view.CalendarFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -85,8 +81,8 @@ public class RMealActivity extends AppCompatActivity implements MealViewInterfac
 
     @Override
     public void onOpenCalendar(PlanMeal planMeal) {
-        CalendarFragment calendarFragment = new CalendarFragment(planMeal);
-        calendarFragment.show(getSupportFragmentManager(),"calendar fragment");
+        //CalendarFragment calendarFragment = new CalendarFragment(planMeal);
+        //calendarFragment.show(getSupportFragmentManager(),"calendar fragment");
 
     }
 }

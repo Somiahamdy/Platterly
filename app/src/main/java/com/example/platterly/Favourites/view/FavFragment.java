@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.platterly.Favourites.presenter.FavPresenterImp;
 import com.example.platterly.Favourites.presenter.FavPresenterInterface;
@@ -41,6 +42,7 @@ public class FavFragment extends Fragment implements FavViewInterface , onFavCli
     RMealRemoteDataSource mealRemoteDataSource ;
     MealLocalDataSource mealLocalDataSource;
     FavViewInterface ifavView;
+    Button remove;
 
 
     @Override
@@ -64,7 +66,7 @@ public class FavFragment extends Fragment implements FavViewInterface , onFavCli
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         favRecycler.setLayoutManager(layoutManager);
-
+        //remove=view.findViewById(R.id.btnremove);
         favAdapter = new FavAdapter(context,this);
         mealRemoteDataSource= RMealRemoteDataSourceImp.getInstance();
         mealLocalDataSource = MealLocalDataSourceimp.getInstance(context);
@@ -73,6 +75,7 @@ public class FavFragment extends Fragment implements FavViewInterface , onFavCli
         // favAdapter = new FavAdapter(new ArrayList<>(),FavProductsActivity.CONTEXT_IGNORE_SECURITY,FavProductsActivity.class);
         ifavPresenter= new FavPresenterImp(mealrepo,this);
         ifavPresenter.getFavMeals(context);
+
        /* mealrepo.getStoredFavMeals().observe(getViewLifecycleOwner(), new Observer<List<Meal>>() {
             @Override
             public void onChanged(List<Meal> meals) {
@@ -101,6 +104,6 @@ public class FavFragment extends Fragment implements FavViewInterface , onFavCli
 
     @Override
     public void removeFromFav(Meal meal) {
-
+        ifavPresenter.deleteMeal(meal);
     }
 }

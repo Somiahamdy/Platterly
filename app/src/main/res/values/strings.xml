@@ -62,6 +62,14 @@
     <string name="addtoplann">Add To Plan</string>
     <string name="addtocal">Add To Calendar</string>
     <string name="countries">Countries</string>
+    <string name="Ingredients" />
+    <string name="ingredients">Ingredients</string>
+    <string name="steps">Steps</string>
+    <string name="toturial">Tutorial</string>
+    <string name="categories">Categories</string>
+    <string name="platterly">Platterly</string>
+    <string name="remove">Remove</string>
+    <string name="Remove" />
 
     <string-array name="spinner_items">
         <item>Name</item>

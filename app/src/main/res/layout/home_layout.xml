@@ -5,8 +5,7 @@
     android:id="@+id/home_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#00FFFFFF"
-    android:backgroundTint="#00FFFFFF"
+
     android:visibility="visible">
 
     <androidx.cardview.widget.CardView
@@ -21,13 +20,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="250dp"
-            android:layout_height="242dp"
-            android:background="#BAFFFFFF">
+            android:layout_height="235dp"
+            android:background="#FFFFFF">
 
             <ImageView
                 android:id="@+id/rmealimg"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="180dp"
+                android:layout_height="160dp"
                 android:layout_marginTop="8dp"
                 android:radius="20dp"
                 app:layout_constraintCircleRadius="20dp"
@@ -41,10 +40,10 @@
                 android:id="@+id/rmealnameview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#000000"
                 android:textColorLink="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold|italic"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rmealimg" />
@@ -53,6 +52,7 @@
                 android:id="@+id/rmealcatview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#000000"
                 android:textColorLink="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

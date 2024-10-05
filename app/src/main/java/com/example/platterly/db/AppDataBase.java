@@ -12,7 +12,7 @@ import com.example.platterly.model.Meal;
 import com.example.platterly.model.PlanMeal;
 import com.example.platterly.plan.view.Converters;
 
-@Database(entities = {Meal.class, PlanMeal.class}, version = 3)
+@Database(entities = {Meal.class, PlanMeal.class}, version = 6)
 @TypeConverters({Converters.class})
 public abstract class AppDataBase extends RoomDatabase {
     private static AppDataBase instance = null;

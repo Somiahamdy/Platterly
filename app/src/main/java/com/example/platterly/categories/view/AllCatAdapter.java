@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.platterly.Country.view.CountryAdapter;
 import com.example.platterly.R;
 import com.example.platterly.home.view.HomeAdapter;
 import com.example.platterly.meal.view.RMealActivity;
@@ -34,6 +35,7 @@ public class AllCatAdapter extends RecyclerView.Adapter<AllCatAdapter.ViewHolder
     private static final String TAG="allcatviewer";
     private  onAllCatClickListener catlistener;
     public static String MealCat="MEALCAT";
+    public static String CatAdpaterCall="CatAdapterCall";
 
     public AllCatAdapter( Context context, onAllCatClickListener _listener) {
         cat = new ArrayList<>();
@@ -85,9 +87,11 @@ public class AllCatAdapter extends RecyclerView.Adapter<AllCatAdapter.ViewHolder
         holder.constraintlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,cat.get(position).getStrCategory(),Toast.LENGTH_SHORT).show();
+               // Toast.makeText(context,cat.get(position).getStrCategory(),Toast.LENGTH_SHORT).show();
                 Intent mealintent = new Intent(context, MealSearchActivity.class);
                 mealintent.putExtra(AllCatAdapter.MealCat,cat.get(position).getStrCategory());
+                mealintent.putExtra(AllCatAdapter.CatAdpaterCall,true);
+                mealintent.putExtra(CountryAdapter.CountryAdapterCall, false);
 
                 context.startActivity(mealintent);
 

@@ -5,12 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    android:backgroundTint="#F5B421"
     tools:context=".mealsearch.view.MealSearchActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mealsearchrv"
-        android:layout_width="409dp"
+        android:layout_width="333dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

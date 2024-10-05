@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,7 +23,6 @@ import com.example.platterly.R;
 import com.example.platterly.home.view.HomeAdapter;
 import com.example.platterly.model.Meal;
 import com.example.platterly.model.PlanMeal;
-import com.example.platterly.plan.view.CalendarFragment;
 import com.example.platterly.plan.view.PlanActivity;
 
 import java.util.ArrayList;
@@ -58,6 +58,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
         WebView webView;
         ImageButton addToFav;
         ImageButton openplan;
+        RecyclerView ingredientRecycler;
         //PlanMeal planMeal;
 
 
@@ -76,6 +77,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
             webView=v.findViewById(R.id.mealview);
             addToFav = v.findViewById(R.id.mealaddfav);
             openplan = v.findViewById(R.id.opencalendar);
+            ingredientRecycler=v.findViewById(R.id.ingrv);
 
         }
     }
@@ -100,38 +102,55 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
                         .placeholder(R.drawable.ic_launcher_background)
                         .error(R.drawable.ic_launcher_foreground))
                 .into(holder.img);
+        meal.get(position).setIngredientsFromFields();
+        meal.get(position).setMeasuresFromFields();
+        List<String> ingredients =  meal.get(position).getIngredients() != null ? meal.get(position).getIngredients() : new ArrayList<>();
+        List<String> measures = meal.get(position).getMeasures() != null ? meal.get(position).getMeasures() : new ArrayList<>();
+
+
+        IngredientAdapter ingredientAdapter = new IngredientAdapter(context, ingredients, measures);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
+        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        holder.ingredientRecycler.setLayoutManager(linearLayoutManager);
+        holder.ingredientRecycler.setAdapter(ingredientAdapter);
 
         holder.constraintlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,meal.get(position).getStrCategory(),Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(context,meal.get(position).getStrCategory(),Toast.LENGTH_SHORT).show();
 
             }
         });
+
+
         holder.webView.getSettings().setJavaScriptEnabled(true);
         String URL=meal.get(position).getStrYoutube().replace("watch?v=","embed/");
         holder.webView.loadUrl(URL);
-        if(fav==false){
-            holder.addToFav.setImageResource(R.drawable.heartempty1);
-        }else if(fav==true){
-            holder.addToFav.setImageResource(R.drawable.heartfill);
 
+        if (meal.get(position).getFavourite()) {
+            holder.addToFav.setImageResource(R.drawable.baseline_favorite_24);  // Change icon to indicate removal
+        } else {
+            holder.addToFav.setImageResource(R.drawable.baseline_favorite_border_24);  // Change icon to indicate addition
         }
+
         holder.addToFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(fav==false){
-                    meallistener.onMealAddFavListener(meal.get(position));
-                    holder.addToFav.setImageResource(R.drawable.heartfill);
-                    fav=true;
-                }else if(fav==true){
-                    meallistener.onMealRemoveFavListener(meal.get(position));
-                    holder.addToFav.setImageResource(R.drawable.heartempty1);
-                    fav=false;
+                if (meal.get(position).getFavourite()) {
+                    meal.get(position).setFavourite(false);  // Remove from plan
+                    holder.addToFav.setImageResource(R.drawable.baseline_favorite_border_24);  // Change icon to "Add"
+                    meallistener.onMealRemoveFavListener(meal.get(position));  // Notify listener to handle removal
+                    Toast.makeText(context, " removed from Favourites", Toast.LENGTH_SHORT).show();
+                } else {
+                    meal.get(position).setFavourite(true);  // Add to plan
+                    holder.addToFav.setImageResource(R.drawable.baseline_favorite_24);  // Change icon to "Remove"
+                    meallistener.onMealAddFavListener(meal.get(position));  // Notify listener to handle addition
+                    Toast.makeText(context, " added to Favourites", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
+
+
         holder.openplan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
