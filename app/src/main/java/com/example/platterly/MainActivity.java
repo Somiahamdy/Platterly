@@ -76,23 +76,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if(item.getItemId()==R.id.fav_page){
-                Toast.makeText(MainActivity.this, "Favorites", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(MainActivity.this, "Favorites", Toast.LENGTH_SHORT).show();
                 loadFragment(favFrag, FAV_Frg_TAG);
                 return true;
             }else if(item.getItemId()==R.id.home_page){
-                Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
                 loadFragment(homeFrag, HOME_Frg_TAG);
                 return true;
             }else if(item.getItemId()==R.id.cat_page){
-                Toast.makeText(MainActivity.this, "Categories", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Categories", Toast.LENGTH_SHORT).show();
                 loadFragment(catFrag, CAT_Frg_TAG);
                 return true;
             }else if(item.getItemId()==R.id.search_page){
-                Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
                 loadFragment(searchFrag, SEARCH_FRG_TAG);
                 return true;
             }else if(item.getItemId()==R.id.plan_page){
-                Toast.makeText(MainActivity.this, "Plan", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Plan", Toast.LENGTH_SHORT).show();
                 loadFragment(planFragment, PLAN_FRG_TAG);
 
                 return true;
