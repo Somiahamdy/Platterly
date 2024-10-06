@@ -159,7 +159,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
 
                 //meallistener.onOpenCalendar(planMeal);
 
-                 Intent mealCalenderIntent = new Intent(context, PlanActivity.class);
+                Intent mealCalenderIntent = new Intent(context, PlanActivity.class);
                 mealCalenderIntent.putExtra(HomeAdapter.MealID,meal.get(position).getIdMeal());
                 mealCalenderIntent.putExtra(MealAdapter.MEALPLANNAME,meal.get(position).getStrMeal());
                 mealCalenderIntent.putExtra(MealAdapter.MealThumb,meal.get(position).getStrMealThumb());

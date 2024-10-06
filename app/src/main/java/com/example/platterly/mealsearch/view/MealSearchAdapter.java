@@ -3,6 +3,10 @@ package com.example.platterly.mealsearch.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,11 +87,22 @@ public class MealSearchAdapter extends RecyclerView.Adapter<MealSearchAdapter.Vi
         holder.constraintlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(context,meal.get(position).getStrCategory(),Toast.LENGTH_SHORT).show();
-                Intent mealsearchintent = new Intent(context, RMealActivity.class);
-                mealsearchintent.putExtra(HomeAdapter.MealID,meal.get(position).getIdMeal());
 
-                context.startActivity(mealsearchintent);
+                if (isNetworkAvailable()) {
+                    // Network is available, start the activity
+                    Intent mealsearchintent = new Intent(context, RMealActivity.class);
+                    mealsearchintent.putExtra(HomeAdapter.MealID, meal.get(position).getIdMeal());
+                    context.startActivity(mealsearchintent);
+                } else {
+                    // No internet connection, show a toast
+                    Toast.makeText(context, "No Internet Connection. Please try again later.", Toast.LENGTH_SHORT).show();
+                }
+
+//                Toast.makeText(context,meal.get(position).getStrCategory(),Toast.LENGTH_SHORT).show();
+                //Intent mealsearchintent = new Intent(context, RMealActivity.class);
+               // mealsearchintent.putExtra(HomeAdapter.MealID,meal.get(position).getIdMeal());
+
+                //context.startActivity(mealsearchintent);
             }
         });
 
@@ -97,5 +112,21 @@ public class MealSearchAdapter extends RecyclerView.Adapter<MealSearchAdapter.Vi
     public int getItemCount() {
 
         return meal.size();
+    }
+
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+                return capabilities != null &&
+                        capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
+            } else {
+                NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+                return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+            }
+        }
+        return false;
     }
 }

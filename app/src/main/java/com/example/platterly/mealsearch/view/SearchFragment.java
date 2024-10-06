@@ -1,6 +1,7 @@
 package com.example.platterly.mealsearch.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.SearchView;
@@ -78,16 +80,14 @@ public class SearchFragment extends Fragment implements onMealSearchClickListene
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-/*
-        countrybtn=view.findViewById(R.id.searchcountrybtn);
-        catbtn=view.findViewById(R.id.catsearchbtn);
-        namebtn=view.findViewById(R.id.namesearchbtn);
 
-        cntrybtn=view.findViewById(R.id.cntrybtn);
-        namesbtn=view.findViewById(R.id.namebtn);
-        catsbtn=view.findViewById(R.id.catbtn);
-        ingsbtn=view.findViewById(R.id.ingbtn);*/
         search=view.findViewById(R.id.searchView);
+        int searchEditTextId = search.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+        EditText searchEditText = search.findViewById(searchEditTextId);
+
+        searchEditText.setTextColor(Color.BLACK);
+        searchEditText.setHintTextColor(Color.GRAY);
+
         srchspinner=view.findViewById(R.id.searchspinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
@@ -182,62 +182,6 @@ public class SearchFragment extends Fragment implements onMealSearchClickListene
                 // Do something here if needed
             }
         });
-
-/*
-        cntrybtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        imealPresenter.getMealSearchcountry(s);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String s) {
-                        return true;
-                    }
-                });
-            }
-        });
-
-        namesbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        imealPresenter.getMealSearchname(s);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String s) {
-                        return true;
-                    }
-                });
-            }
-        });
-
-        catsbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        imealPresenter.getMealSearch(s);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String s) {
-                        return false;
-                    }
-                });
-            }
-        });
-*/
 
     }
 

@@ -76,12 +76,6 @@ public class FavFragment extends Fragment implements FavViewInterface , onFavCli
         ifavPresenter= new FavPresenterImp(mealrepo,this);
         ifavPresenter.getFavMeals(context);
 
-       /* mealrepo.getStoredFavMeals().observe(getViewLifecycleOwner(), new Observer<List<Meal>>() {
-            @Override
-            public void onChanged(List<Meal> meals) {
-                showMeals(meals);
-            }
-        });*/
     }
 
     @Override
